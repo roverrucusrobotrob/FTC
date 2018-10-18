@@ -1,1 +1,3 @@
-
+npm set init.author.name “Channing Tatum”
+npm set init.author.email “magic.mike@gmail.com”
+npm set init.author.url “http://www.magicmikemovie.com"
