@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -43,12 +44,14 @@ public class DriverTeleOP extends OpMode {
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
     private DcMotor ArmMotor = null;
+    private Servo latch = null;
 
     @Override
     public void init() {
         leftDrive  = hardwareMap.get(DcMotor.class, "Left_Motor");
         rightDrive = hardwareMap.get(DcMotor.class, "Right_Motor");
         ArmMotor = hardwareMap.get(DcMotor.class, "Arm_Motor");
+        latch = hardwareMap.get(Servo.class, "latch");
         }
         @Override
         public void loop(){
@@ -59,6 +62,11 @@ public class DriverTeleOP extends OpMode {
             double turn  =  -gamepad1.left_stick_y;
             double extend = gamepad1.left_trigger;
             double dextend = gamepad1.right_trigger;
+            if(gamepad1.y) {
+                latch.setPosition(0);
+            } else if (gamepad1.a) {
+                latch.setPosition(1);
+            }
             armPower     = Range.clip(extend - dextend, -1.0, 1.0) ;
             leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
             rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;

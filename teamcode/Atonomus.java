@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -47,6 +48,7 @@ public class Atonomus extends LinearOpMode {
     private DcMotor leftMotor = null;
     private DcMotor rightMotor = null;
     private DcMotor ArmMotor = null;
+    private Servo servom = null;
 
     //@Override
     /*public void init() {
@@ -56,9 +58,11 @@ public class Atonomus extends LinearOpMode {
         }*/
         @Override
         public void runOpMode() throws InterruptedException{
-            leftMotor = hardwareMap.dcMotor.get("Left_Motor");
-            rightMotor = hardwareMap.dcMotor.get("Right_Motor");
+            leftMotor  = hardwareMap.get(DcMotor.class, "Left_Motor");
+            rightMotor = hardwareMap.get(DcMotor.class, "Right_Motor");
+            ArmMotor = hardwareMap.get(DcMotor.class, "Arm_Motor");
             rightMotor.setDirection(DcMotor.Direction.REVERSE);
+            servom = hardwareMap.servo.get("latch");
 
             telemetry.addData("Mode", "waiting");
             telemetry.update();
@@ -72,25 +76,25 @@ public class Atonomus extends LinearOpMode {
 
             // set both motors to 25% power.
 
-            leftMotor.setPower(1);
-            rightMotor.setPower(1);
+            ArmMotor.setPower(-.5);
 
             // wait for 2 seconds.
-            sleep(2000);
+            sleep(900);
 
             // set motor power to zero to stop motors.
 
-            leftMotor.setPower(-.5);
-            rightMotor.setPower(.5);
+            servom.setPosition(1);
+            servom.setPosition(0);
 
             sleep(1500);
 
-            leftMotor.setPower(1);
-            rightMotor.setPower(1);
+            leftMotor.setPower(-1);
+            rightMotor.setPower(-1);
 
-            sleep(2000);
+            sleep(1000);
 
             leftMotor.setPower(0);
             rightMotor.setPower(0);
+
     }
 }
