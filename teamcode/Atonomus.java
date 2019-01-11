@@ -64,7 +64,7 @@ public class Atonomus extends LinearOpMode {
         telemetry.update();
 
         // set both motors to 25% power.
-        moveLift(.5, -12.65, 5);
+        //moveLift(.5, -18.65, 5000);
         ArmMotor.setPower(-.9);
         //or naw
         // wait for 800 milliseconds.
@@ -75,7 +75,7 @@ public class Atonomus extends LinearOpMode {
         ArmMotor.setPower(0);
 
         //Wait some milli-sss u catchin’ my vibes
-        sleep(800);
+        sleep(100);
 
         //set servo from 1 to 0
         servom.setPosition(1);
@@ -84,9 +84,9 @@ public class Atonomus extends LinearOpMode {
         sleep(1500);
 
         leftMotor.setPower(-1);
-        rightMotor.setPower(-1);
+        rightMotor.setPower(-1  );
 
-        sleep(1000);
+         sleep(2250);
 
         leftMotor.setPower(0);
         rightMotor.setPower(0);
