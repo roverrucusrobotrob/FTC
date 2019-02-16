@@ -1,15 +1,5 @@
-package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import java.util.List;
-import org.firstinspires.ftc.robotcore.external.ClassFactory;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
-import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
-import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -17,8 +7,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
+import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+
 @Autonomous
-public class Atonomus extends LinearOpMode {
+public class Atonomascot extends LinearOpMode {
+
     // Declare OpMode members.
     private double ticksPerRevolution = 1440;
     private double diameter = 2.5;
@@ -30,22 +26,21 @@ public class Atonomus extends LinearOpMode {
     private DcMotor ArmMotor = null;
     private Servo servom = null;
     private Servo dropper = null;
+    private DcMotor clawMotor = null;
+    private Servo extendymcboi = null;
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
     private static final String LABEL_SILVER_MINERAL = "Silver Mineral";
-
     private static final String VUFORIA_KEY = "ATqh6ID/////AAABmSp+cac+nElJlqbw4zOQwMhXrKa3JOmoRJkBzGVI4j79O609HvRnB8eo+gm0kFUNlBO/wps9ungwpcL6P8TbvN/6F3QGSKmR7BOuFb5bL1SRg/GxGFab2Qn18T3c/lwPJOLjokahChuNzB3kEWfjz2V+vH30nGyqHJ5LEmaiUZUpBZGTXTwOEIwzrZD9vvtnQsq8xbbdG12CwZhBKzyEsGQfleZkPuALiqFTwVjQF8uNC9+kZC3JZ+itePJ2dpBlGUTo3Eoim/+5r3D2CQ06pIQasa+cZAnagDDg18QCSF9oyY3DmTR3akC5lbW6Bt8z2n8dIc0Me1uVZHVbP3zhIpQ3KK14xF4vDRv2Gqre7FR0";
-
     private VuforiaLocalizer vuforia;
-
     private TFObjectDetector tfod;
 
     //@Override
-    /*public void init() {
-        leftMotor  = hardwareMap.get(DcMotor.class, "Left_Motor");
-        rightMotor = hardwareMap.get(DcMotor.class, "Right_Motor");
-        ArmMotor = hardwareMap.get(DcMotor.  class, "Arm_Motor");
-        }*/
+/*public void init() {
+    leftMotor  = hardwareMap.get(DcMotor.class, "Left_Motor");
+    rightMotor = hardwareMap.get(DcMotor.class, "Right_Motor");
+    ArmMotor = hardwareMap.get(DcMotor.class, "Arm_Motor");
+    }*/
     public void moveLift(double power,double inches, long time) throws InterruptedException {
         ArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         ArmMotor.setTargetPosition((int) (ticksPerInch * inches));
@@ -61,6 +56,8 @@ public class Atonomus extends LinearOpMode {
         leftMotor = hardwareMap.get(DcMotor.class, "Left_Motor");
         rightMotor = hardwareMap.get(DcMotor.class, "Right_Motor");
         ArmMotor = hardwareMap.get(DcMotor.class, "Arm_Motor");
+        clawMotor = hardwareMap.get(DcMotor.class, "Claw_Motor");
+        extendymcboi = hardwareMap.get(Servo.class, "Claw_Servo");
         rightMotor.setDirection(DcMotor.Direction.REVERSE);
         servom = hardwareMap.servo.get("latch");
         ArmMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -100,11 +97,51 @@ public class Atonomus extends LinearOpMode {
         leftMotor.setPower(-1);
         rightMotor.setPower(1);
 
-        sleep(500);
+        sleep(2250);
 
         leftMotor.setPower(0);
         rightMotor.setPower(0);
 
+        leftMotor.setPower(1);
+        rightMotor.setPower(1);
+
+        sleep(250);
+
+        leftMotor.setPower(0);
+        rightMotor.setPower(0);
+
+        sleep(500);
+
+        extendymcboi.setPosition(.45);
+        extendymcboi.setPosition(.05);
+
+        sleep(5000);
+
+        clawMotor.setPower(1);
+        sleep(500);
+        clawMotor.setPower(-1);
+        sleep(200);
+        clawMotor.setPower(1);
+        sleep(300);
+        clawMotor.setPower(-1);
+        sleep(200);
+        clawMotor.setPower(1);
+        sleep(100);
+        clawMotor.setPower(-1);
+        sleep(100);
+        clawMotor.setPower(1);
+        sleep(100);
+        clawMotor.setPower(-1);
+        sleep(100);
+        clawMotor.setPower(1);
+        sleep(100);
+        clawMotor.setPower(-1);
+        sleep(100);
+        clawMotor.setPower(1);
+        sleep(100);
+        clawMotor.setPower(-1);
+        sleep(100);
+        clawMotor.setPower(0);
         boolean img = false;
 
         for (int i=0; i==2; i++) {
