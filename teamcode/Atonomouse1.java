@@ -44,7 +44,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         private int silverMineral2X;
         boolean ImRec() {
             boolean fin = true;
-            initVuforia();
             boolean gewrgs = false;
             if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
                 initTfod();
@@ -77,24 +76,26 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                                     }
                                 }
                                 if (goldMineralX != -1) {
-                                        gewrgs = true;
-                                        fin = false;
+                                    gewrgs = true;
+                                    fin = false;
                                 }
-
+                                else if (silverMineral1X != -1 || silverMineral2X != -1) {
+                                    gewrgs = false;
+                                    fin = false;
+                                }
                             }
                             telemetry.update();
                         }
                     }
                 }
             }
-            if (tfod != null) {
-                tfod.shutdown();
-            }
+
+            tfod.shutdown();
             return gewrgs;
         }
         @Override
         public void runOpMode() {
-
+            initVuforia();
             leftMotor = hardwareMap.get(DcMotor.class, "Left_Motor");
             rightMotor = hardwareMap.get(DcMotor.class, "Right_Motor");
             ArmMotor = hardwareMap.get(DcMotor.class, "Arm_Motor");
@@ -160,16 +161,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                     rightMotor.setPower(0);
                     leftMotor.setPower(0);
                 }
-                else {
+                else{
                     rightMotor.setPower(.5);
                     leftMotor.setPower(.5);
                     sleep(1000);
                     rightMotor.setPower(0);
                     leftMotor.setPower(0);
-                    sleep(800);
-                    dropper.setPosition(0);
-                    sleep(500);
-                    dropper.setPosition(1);
                 }
                 img = ImRec();
                 if(img){
@@ -179,27 +176,32 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                         rightMotor.setPower(0);
                         leftMotor.setPower(0);
                     }
-                    else if(!img){
+                img = ImRec();
+                if(!img){
                         rightMotor.setPower(.5);
                         leftMotor.setPower(-.5);
                         sleep(2000);
                         rightMotor.setPower(0);
                         leftMotor.setPower(0);
                     }
-                    if (!img) {
+                img = ImRec();
+                if (!img) {
                     rightMotor.setPower(-.5);
                     leftMotor.setPower(.5);
                     sleep(1000);
                     rightMotor.setPower(0);
                     leftMotor.setPower(0);
-                } else if (!img){
+                }
+                img = ImRec();
+                if (!img){
                     rightMotor.setPower(.5);
                     leftMotor.setPower(-.5);
                     sleep(2000);
                     rightMotor.setPower(0);
                     leftMotor.setPower(0);
                 }
-                else if (!img){
+                img = ImRec();
+                if (!img){
                     rightMotor.setPower(-.5);
                     leftMotor.setPower(.5);
                     sleep(1000);

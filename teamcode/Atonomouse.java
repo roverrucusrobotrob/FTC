@@ -1,5 +1,4 @@
 package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -98,7 +97,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             leftMotor.setPower(-1);
             rightMotor.setPower(1);
 
-            sleep(2250);
+            sleep(2500);
 
             leftMotor.setPower(0);
             rightMotor.setPower(0);

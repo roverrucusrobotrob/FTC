@@ -51,6 +51,8 @@ public class DriverTeleOP extends OpMode {
     private double tfjf = 0;
     private double jz = 0;
     private double dz = 0;
+    private double du = 0;
+
     @Override
     public void init() {
         leftDrive  = hardwareMap.get(DcMotor.class, "Left_Motor");
@@ -92,6 +94,15 @@ public class DriverTeleOP extends OpMode {
             else {jz = 0;}
             if (gamepad1.dpad_left) {dz = 1;}
             else {dz = 0;}
+            if(gamepad1.dpad_up && du<.25){
+                du+=.25;
+            }
+            if(gamepad1.dpad_down && du>.25){
+                du-=.25;
+            }
+            leftDrive.setPower(du);
+            rightDrive.setPower(du);
+            du=0;
             extendy += clawPower / 1000;
             clawMotor.setPower(armPower);
             ArmMotor.setPower(tfjf);
