@@ -61,6 +61,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                 }
 
                 while (fin) {
+
                     if(!opModeIsActive()){fin = false;}
                     if (tfod != null) {
                         // getUpdatedRecognitions() will return null if no new information is available since
@@ -76,10 +77,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                                     }
                                 }
                                 if (goldMineralX != -1) {
+
                                     gewrgs = true;
                                     fin = false;
                                 }
                                 else if (silverMineral1X != -1 || silverMineral2X != -1) {
+
                                     gewrgs = false;
                                     fin = false;
                                 }
@@ -117,7 +120,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             ArmMotor.setPower(.9);
             //or naw
             // wait for 800 milliseconds.
-            sleep(1300);
+            sleep(1000);
 
             // set motor power to zero to stop motors. We Forgot this so um yeah
             ArmMotor.setPower(0);
@@ -149,7 +152,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
             // set motor power to zero to stop motors. We Forgot this so um yeah
             ArmMotor.setPower(0);
-
+            CameraDevice.getInstance().setFlashTorchMode(true);
             boolean img = ImRec();
 
             //for (int i=0; i==2; i++) {
@@ -161,6 +164,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                     rightMotor.setPower(0);
                     leftMotor.setPower(0);
                 }
+                sleep(100);
                 else{
                     rightMotor.setPower(.5);
                     leftMotor.setPower(.5);
@@ -169,7 +173,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                     leftMotor.setPower(0);
                 }
                 img = ImRec();
-                if(img){
+                sleep(100);
+                if(imwszg){
                         rightMotor.setPower(-.5);
                         leftMotor.setPower(.5);
                         sleep(1000);
@@ -177,6 +182,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                         leftMotor.setPower(0);
                     }
                 img = ImRec();
+                sleep(100);
                 if(!img){
                         rightMotor.setPower(.5);
                         leftMotor.setPower(-.5);
@@ -192,6 +198,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                     rightMotor.setPower(0);
                     leftMotor.setPower(0);
                 }
+                sleep(100);
+
                 img = ImRec();
                 if (!img){
                     rightMotor.setPower(.5);
@@ -201,14 +209,18 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                     leftMotor.setPower(0);
                 }
                 img = ImRec();
-                if (!img){
+                 sleep(100);
+
+            if (!img){
                     rightMotor.setPower(-.5);
                     leftMotor.setPower(.5);
                     sleep(1000);
                     rightMotor.setPower(0);
                     leftMotor.setPower(0);
                 }
-                //if(i==2){
+            sleep(100);
+
+            //if(i==2){
                   //  img=true;
                 //}
             }
